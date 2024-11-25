@@ -1,10 +1,12 @@
 @import './constants.css';
 
-#root {
-  justify-content: center;
+html,body{
+  margin: 0;
+  padding: 0;
+}
+.App {
   display: grid;
   place-content: center;
   height: 100vh;
   background: var(--bg-color);
-
 }

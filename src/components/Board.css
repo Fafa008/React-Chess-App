@@ -1,5 +1,7 @@
 .Board{
-
+    display: grid;
+    grid-template-columns: calc(.25*var(--tile-size)) calc(.25*var(--tile-size));
+    margin-right: 100vh;
 }
 .tiles{
     display: grid;
@@ -7,4 +9,15 @@
     grid-template-rows: repeat(8, var(--tile-size));
     width: calc(8*var(--tile-size));
     color: aliceblue;
+}
+.tile{
+
+}
+
+.tile--light{
+background-color: var(--light-tile);
+}
+
+.tile--dark{
+background-color: var(--dark-tile);
 }
