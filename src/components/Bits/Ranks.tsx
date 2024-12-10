@@ -1,4 +1,3 @@
-import React from "react";
 import "./Ranks.css";
 
 function Ranks({ ranks }: { ranks: number[] }) {

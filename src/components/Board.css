@@ -1,14 +1,14 @@
-.Board{
+.Board {
     display: grid;
-    grid-template-columns: calc(.25*var(--tile-size)) calc(.25*var(--tile-size));
-    margin-right: 100vh;
+    position: relative;
+    grid-template-columns: calc(.25*var(--tile-size)) calc(8*var(--tile-size));
 }
 .tiles{
     display: grid;
     grid-template-columns: repeat(8, var(--tile-size));
     grid-template-rows: repeat(8, var(--tile-size));
     width: calc(8*var(--tile-size));
-    color: aliceblue;
+    color: rgb(19, 20, 20);
 }
 .tile{
 
