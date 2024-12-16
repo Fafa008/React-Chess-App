@@ -5,8 +5,15 @@ interface PieceProps {
 }
 
 function Piece({ rank, file, piece }: PieceProps) {
+  const ondragstart = (e: any) => {
+    e.dataTransfer.setData("text/plain", `${piece}, ${rank}, ${file}`);
+  };
   return (
-    <div className={`piece ${piece} p-${file}${rank}`} draggable={true}></div>
+    <div
+      className={`piece ${piece} p-${file}${rank}`}
+      draggable={true}
+      onDragStart={ondragstart}
+    ></div>
   );
 }
 

@@ -2,6 +2,7 @@ import "./Board.css";
 import Ranks from "./Bits/Ranks";
 import File from "./Bits/File";
 import Pieces from "./Pieces/Pieces";
+import { getCharacter } from "../helper";
 
 function Board() {
   function getClassname(i: number, j: number): string {
@@ -11,11 +12,11 @@ function Board() {
   }
   const ranks: number[] = Array(8)
     .fill(0)
-    .map((x, i) => 8 - i); // Create ranks (8 to 1)
+    .map((x, i) => 8 - i);
 
   const files: number[] = Array(8)
     .fill(0)
-    .map((x, i) => i); // Create files (A to H)
+    .map((x, i) => i);
 
   return (
     <div className="Board">
@@ -23,9 +24,9 @@ function Board() {
       <div className="tiles">
         {ranks.map((rank, i) =>
           files.map((file, j) => (
-            <div key={rank + "" + file} className={getClassname(9 - i, j)}>
-              {file}
+            <div key={file + "" + rank} className={getClassname(9 - i, j)}>
               {rank}
+              {getCharacter(file)}
             </div>
           ))
         )}
