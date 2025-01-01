@@ -5,8 +5,12 @@ interface PieceProps {
 }
 
 function Piece({ rank, file, piece }: PieceProps) {
-  const ondragstart = (e: any) => {
+  const ondragstart: React.DragEventHandler<HTMLDivElement> = (e) => {
+    e.dataTransfer.effectAllowed = `move`;
     e.dataTransfer.setData("text/plain", `${piece}, ${rank}, ${file}`);
+    setTimeout(() => {
+      (e.target as HTMLElement).style.display = "none";
+    }, 0);
   };
   return (
     <div
