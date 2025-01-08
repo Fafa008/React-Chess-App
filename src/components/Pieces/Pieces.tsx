@@ -8,20 +8,19 @@ function Pieces() {
   const ref = useRef<HTMLDivElement | null>(null);
   console.log(state);
 
-  const calculateCoordinates = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (ref.current) {
-      const { width, left, top } = ref.current.getBoundingClientRect();
-      const size = width / 8;
-      const y = Math.floor((e.clientY - left) / size);
-      const x = 7 - Math.floor((e.clientX - top) / size);
-      return [x, y];
-    }
-    return [-1, -1];
+  const calculateCoords = (e: React.DragEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const { top, left, width } = ref.current.getBoundingClientRect();
+    const size = width / 8;
+    const y = Math.floor((e.clientX - left) / size);
+    const x = 7 - Math.floor((e.clientY - top) / size);
+
+    return { x, y };
   };
 
   const ondrop: React.DragEventHandler<HTMLDivElement> = (e) => {
     const newPosition = copyPosition(state);
-    const [x, y] = calculateCoordinates(e);
+    const { x, y } = calculateCoords(e) || { x: -1, y: -1 };
     e.preventDefault();
     const [piece, rankStr, fileStr] = e.dataTransfer
       .getData("text/plain")

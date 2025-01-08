@@ -10,13 +10,13 @@ function Board() {
     c += (i + j) % 2 === 0 ? " tile--dark" : " tile--light";
     return c;
   }
+
   const ranks: number[] = Array(8)
     .fill(0)
     .map((x, i) => 8 - i);
-
   const files: number[] = Array(8)
     .fill(0)
-    .map((x, i) => i);
+    .map((x, i) => i + 1);
 
   return (
     <div className="Board">
@@ -24,10 +24,10 @@ function Board() {
       <div className="tiles">
         {ranks.map((rank, i) =>
           files.map((file, j) => (
-            <div key={file + "" + rank} className={getClassname(9 - i, j)}>
-              {rank}
-              {getCharacter(file)}
-            </div>
+            <div
+              key={file + "" + rank}
+              className={getClassname(7 - i, j)}
+            ></div>
           ))
         )}
       </div>

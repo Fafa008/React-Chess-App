@@ -7,9 +7,9 @@
 }
 
 .piece {
-    width: calc(var(--tile-size));
-    height: calc(var(--tile-size));
-    background-size: contain;
+    width: 12.5%;
+    height: 12.5%;
+    background-size: 100%;
     position: absolute;
 }
 

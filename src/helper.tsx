@@ -1,4 +1,4 @@
-export const getCharacter = (file: number) => String.fromCharCode(file + 97);
+export const getCharacter = (file: number) => String.fromCharCode(file + 96);
 
 export const createPosition = () => {
   const position = new Array(8).fill("").map((x) => new Array(8).fill(""));
