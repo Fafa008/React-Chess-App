@@ -1,5 +1,5 @@
 interface State {
-  // Define the shape of your state here
+  position: string[][];
 }
 
 interface Action {

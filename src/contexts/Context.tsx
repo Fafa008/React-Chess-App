@@ -1,9 +1,28 @@
-import { createContext, useContext } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+import { createPosition } from "../helper";
 
-const AppContext = createContext({});
+interface AppState {
+  position: string[][];
 
-export function useAppContext() {
-  return useContext(AppContext);
+  // add other state properties here
 }
+
+interface AppContextProps {
+  appState: AppState;
+
+  dispatch: React.Dispatch<any>;
+}
+
+const initialState: AppState = {
+  position: createPosition(),
+};
+
+const AppContext = createContext<AppContextProps>({
+  appState: initialState,
+
+  dispatch: () => null,
+});
+
+export const useAppContext = () => useContext(AppContext);
 
 export default AppContext;

@@ -4,6 +4,6 @@ export type GameState = {
   turn: string;
 };
 export const initGameState: GameState = {
-  position: createPosition(),
+  position: [[]],
   turn: "w",
 };

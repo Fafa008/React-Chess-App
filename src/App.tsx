@@ -1,5 +1,4 @@
-import { useReducer } from "react";
-
+import React, { useReducer } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import AppContext from "./contexts/Context";
@@ -8,9 +7,9 @@ import { initGameState } from "./constant";
 
 function App() {
   const [appState, dispatch] = useReducer(reducer, initGameState);
-  const providerState = { appState, dispatch };
+
   return (
-    <AppContext.Provider value={{ providerState }}>
+    <AppContext.Provider value={{ appState, dispatch }}>
       <div className="App">
         <Board />
       </div>

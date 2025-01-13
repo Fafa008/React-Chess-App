@@ -2,11 +2,15 @@ import { useState, useRef } from "react";
 import Piece from "./Piece";
 import "./Pieces.css";
 import { copyPosition, createPosition } from "../../helper";
+import AppContext, { useAppContext } from "../../contexts/Context";
 
 function Pieces() {
-  const [state, setState] = useState(createPosition());
+  const { appState, dispatch } = useAppContext();
+
+  const currentPosition = appState.position;
+
   const ref = useRef<HTMLDivElement | null>(null);
-  console.log(state);
+  console.log(currentPosition);
 
   const calculateCoords = (e: React.DragEvent<HTMLDivElement>) => {
     if (!ref.current) return;
@@ -19,7 +23,7 @@ function Pieces() {
   };
 
   const ondrop: React.DragEventHandler<HTMLDivElement> = (e) => {
-    const newPosition = copyPosition(state);
+    const newPosition = copyPosition(currentPosition);
     const { x, y } = calculateCoords(e) || { x: -1, y: -1 };
     e.preventDefault();
     const [piece, rankStr, fileStr] = e.dataTransfer
@@ -30,7 +34,7 @@ function Pieces() {
     newPosition[rank][file] = "";
     newPosition[x][y] = piece;
 
-    setState(newPosition);
+    dispatch(newPosition);
 
     console.log(piece, rank, file);
   };
@@ -38,16 +42,17 @@ function Pieces() {
   const ondragover: React.DragEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
   };
+
   return (
     <div ref={ref} className="pieces" onDrop={ondrop} onDragOver={ondragover}>
-      {state.map((r, rank) =>
+      {currentPosition.map((r, rank) =>
         r.map((f, file) =>
-          state[rank][file] ? (
+          currentPosition[rank][file] ? (
             <Piece
               key={rank + "-" + file}
               rank={rank}
               file={file}
-              piece={state[rank][file]}
+              piece={currentPosition[rank][file]}
             />
           ) : null
         )
@@ -55,5 +60,4 @@ function Pieces() {
     </div>
   );
 }
-
 export default Pieces;
