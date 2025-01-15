@@ -1,10 +1,8 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext } from "react";
 import { createPosition } from "../helper";
 
 interface AppState {
-  position: string[][];
-
-  // add other state properties here
+  position: string[][][];
 }
 
 interface AppContextProps {

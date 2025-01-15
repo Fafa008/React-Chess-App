@@ -1,16 +1,15 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Piece from "./Piece";
 import "./Pieces.css";
-import { copyPosition, createPosition } from "../../helper";
-import AppContext, { useAppContext } from "../../contexts/Context";
+import { copyPosition } from "../../helper";
+import { useAppContext } from "../../contexts/Context";
+import { makeNewMove } from "../../reducers/actions/move";
 
 function Pieces() {
   const { appState, dispatch } = useAppContext();
 
-  const currentPosition = appState.position;
-
+  const currentPosition = appState.position[appState.position.length - 1];
   const ref = useRef<HTMLDivElement | null>(null);
-  console.log(currentPosition);
 
   const calculateCoords = (e: React.DragEvent<HTMLDivElement>) => {
     if (!ref.current) return;
@@ -34,7 +33,7 @@ function Pieces() {
     newPosition[rank][file] = "";
     newPosition[x][y] = piece;
 
-    dispatch(newPosition);
+    dispatch(makeNewMove({ newPosition }));
 
     console.log(piece, rank, file);
   };

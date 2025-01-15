@@ -1,9 +1,10 @@
 import { createPosition } from "./helper";
+
 export type GameState = {
-  position: string[][];
+  position: string[][][];
   turn: string;
 };
 export const initGameState: GameState = {
-  position: [[]],
+  position: [createPosition()],
   turn: "w",
 };
