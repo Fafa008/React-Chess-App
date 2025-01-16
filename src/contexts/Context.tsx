@@ -3,6 +3,8 @@ import { createPosition } from "../helper";
 
 interface AppState {
   position: string[][][];
+  turn: string;
+  candidateMoves?: any;
 }
 
 interface AppContextProps {
@@ -13,6 +15,7 @@ interface AppContextProps {
 
 const initialState: AppState = {
   position: createPosition(),
+  turn: "",
 };
 
 const AppContext = createContext<AppContextProps>({

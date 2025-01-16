@@ -3,7 +3,7 @@ import Piece from "./Piece";
 import "./Pieces.css";
 import { copyPosition } from "../../helper";
 import { useAppContext } from "../../contexts/Context";
-import { makeNewMove } from "../../reducers/actions/move";
+import { clearCandidate, makeNewMove } from "../../reducers/actions/move";
 
 function Pieces() {
   const { appState, dispatch } = useAppContext();
@@ -24,18 +24,20 @@ function Pieces() {
   const ondrop: React.DragEventHandler<HTMLDivElement> = (e) => {
     const newPosition = copyPosition(currentPosition);
     const { x, y } = calculateCoords(e) || { x: -1, y: -1 };
-    e.preventDefault();
     const [piece, rankStr, fileStr] = e.dataTransfer
       .getData("text/plain")
       .split(",");
+
     const rank = parseInt(rankStr, 10);
     const file = parseInt(fileStr, 10);
-    newPosition[rank][file] = "";
-    newPosition[x][y] = piece;
-
-    dispatch(makeNewMove({ newPosition }));
-
-    console.log(piece, rank, file);
+    if (
+      appState.candidateMoves?.find((m: number[]) => m[0] === x && m[1] === y)
+    ) {
+      newPosition[rank][file] = "";
+      newPosition[x][y] = piece;
+      dispatch(makeNewMove({ newPosition }));
+    }
+    dispatch(clearCandidate());
   };
 
   const ondragover: React.DragEventHandler<HTMLDivElement> = (e) => {
