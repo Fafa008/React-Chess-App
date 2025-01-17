@@ -1,4 +1,4 @@
-import { getRookMoves } from "./getMoves";
+import { getRookMoves, getKnightMoves } from "./getMoves";
 
 const arbiter = {
   getRegularMoves: function ({
@@ -12,7 +12,8 @@ const arbiter = {
     file: any;
     rank: any;
   }) {
-    return getRookMoves(position, piece, file, rank);
+    if (piece.endsWith("r")) return getRookMoves(position, piece, file, rank);
+    if (piece.endsWith("n")) return getKnightMoves(position, file, rank);
   },
 };
 export default arbiter;
